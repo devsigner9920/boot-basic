@@ -1,14 +1,15 @@
 package me.devsign.home.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class MainController {
+public class ViewController {
     @GetMapping("/")
-    public String index() {
-        System.out.println("TEST");
+    public String index(Model model) {
+        model.addAttribute("user", attributeValue)
         return "index";
     }
 }
