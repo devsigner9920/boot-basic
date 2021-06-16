@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ViewController {
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("user", attributeValue)
         return "index";
     }
 }
