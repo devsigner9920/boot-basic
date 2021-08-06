@@ -1,38 +1,35 @@
-plugins {
-	id 'org.springframework.boot' version '2.5.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
-group = 'me.devsign'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '8'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+group 'me.devsign'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
 
 repositories {
-	maven { url 'https://repo.spring.io/snapshot' }
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-	useJUnitPlatform()
-}
-
-bootBuildImage {
-	builder = 'paketobuildpacks/builder:tiny'
-	environment = ['BP_NATIVE_IMAGE': 'true']
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+    annotationProcessor ('org.projectlombok:lombok')
+    compileOnly ('org.projectlombok:lombok')
+    compile ('org.springframework.boot:spring-boot-starter-web')
+    compile ('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile ('com.h2database:h2')
+    testCompile ('org.springframework.boot:spring-boot-starter-test')
 }
