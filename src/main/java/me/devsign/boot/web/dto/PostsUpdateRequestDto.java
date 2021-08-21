@@ -3,7 +3,6 @@ package me.devsign.boot.web.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.devsign.boot.web.domain.posts.Posts;
 
 @Getter
 @NoArgsConstructor
