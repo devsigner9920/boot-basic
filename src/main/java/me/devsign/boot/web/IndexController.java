@@ -1,6 +1,7 @@
 package me.devsign.boot.web;
 
 import lombok.RequiredArgsConstructor;
+import me.devsign.boot.config.auth.LoginUser;
 import me.devsign.boot.config.auth.dto.SessionUser;
 import me.devsign.boot.service.posts.PostsService;
 import me.devsign.boot.web.dto.PostsResponseDto;
@@ -18,14 +19,16 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
         /*
          * (SessionUser) httpSession.getAttribute("user")
          * 앞서 작성된 CustomOAuth2UserService에서 로그인 성공 시 세션에 SessionUser를 저장하도록 구성했다.
          * 즉, 로그인 성공 시 httpSession.getAttribute("user")에서 값을 가져온다.
+         *
+         * SessionUser user = (SessionUser) httpSession.getAttribute("user");
+         * 반복된 코드를 피하기 위해 LoginUser Annotation을 구현하여 위 코드를 대체한다.
          */
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         /*
          * if(user != null)
          * 세션에 저장된 값이 있을 때만 model에 userName으로 등록한다.
